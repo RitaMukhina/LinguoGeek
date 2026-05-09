@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinguoGeek</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --preply-blue: #002868;
+            --accent-red: #ff3e4c;
+            --text-black: #000000;
+            --gray-bg: #f8f9fa;
+            --border-radius: 30px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; color: var(--text-black); line-height: 1.6; }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+        
+        /* Header */
+        header { height: 80px; display: flex; align-items: center; border-bottom: 1px solid #eee; position: sticky; top: 0; background: #fff; z-index: 1000; }
+        .nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--preply-blue); text-decoration: none; }
+        .menu { display: flex; align-items: center; gap: 30px; }
+        .menu a { text-decoration: none; color: var(--text-black); font-weight: 500; font-size: 15px; }
+        .btn-cta { background: var(--accent-red); color: #fff !important; padding: 12px 28px; border-radius: var(--border-radius); font-weight: 600; }
+
+        /* Hero Section */
+        .hero { padding: 100px 0; display: flex; align-items: center; gap: 60px; }
+        .hero-text { flex: 1.2; }
+        .hero-text h1 { font-size: 56px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+        .hero-text p { font-size: 20px; color: #444; margin-bottom: 40px; }
+        .hero-img { flex: 1; border-radius: var(--border-radius); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .hero-img img { width: 100%; display: block; }
+
+        /* About Section */
+        .about { padding: 100px 0; background: #fff; }
+        .about-content { display: flex; gap: 60px; align-items: center; }
+        .about-text { flex: 1; }
+        .about-video { flex: 1.2; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        /* Club Section */
+        .club-box {
+            display: flex;
+            gap: 60px;
+            align-items: center;
+            background: var(--gray-bg);
+            padding: 60px;
+            border-radius: 40px;
+            margin-bottom: 100px;
+        }
+        .club-img { flex: 1; border-radius: 24px; overflow: hidden; }
+        .club-img img { width: 100%; display: block; }
+        .club-info { flex: 1; }
+
+        /* Pricing Grid */
+        .section-title { text-align: center; font-size: 40px; font-weight: 800; margin-bottom: 60px; }
+        .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .price-card { border: 1px solid #eee; border-radius: var(--border-radius); padding: 40px; transition: 0.3s; display: flex; flex-direction: column; }
+        .price-card:hover { border-color: var(--preply-blue); transform: translateY(-5px); }
+        .price-card h3 { font-size: 22px; margin-bottom: 10px; color: var(--preply-blue); }
+        .price-val { font-size: 32px; font-weight: 800; margin-bottom: 20px; }
+        .price-val small { font-size: 16px; font-weight: 400; color: #666; }
+        .price-card ul { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+        .price-card li { margin-bottom: 10px; position: relative; padding-left: 25px; }
+        .price-card li::before { content: "✓"; color: var(--accent-red); position: absolute; left: 0; font-weight: bold; }
+
+        /* Social Block */
+        .socials { background: var(--gray-bg); padding: 80px 0; text-align: center; border-radius: 40px; margin: 50px 0; }
+        .social-links { display: flex; justify-content: center; gap: 15px; margin-top: 30px; flex-wrap: wrap; }
+        .social-btn { padding: 15px 30px; border-radius: 15px; text-decoration: none; color: #fff; font-weight: 600; }
+        .tg { background: #229ED9; }
+        .vk { background: #4C75A3; }
+        .yt { background: #FF0000; }
+
+        /* Form Section */
+        .form-section { padding: 100px 0; }
+        .form-box { max-width: 600px; margin: 0 auto; background: #fff; padding: 50px; border-radius: var(--border-radius); border: 1px solid #eee; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        
+        /* Исправленные стили для Safari */
+        input, select { 
+            width: 100%; 
+            height: 54px; /* Фиксированная высота для всех браузеров */
+            padding: 0 16px; 
+            margin-bottom: 20px; 
+            border-radius: 12px; 
+            border: 1px solid #ddd; 
+            font-family: inherit; 
+            font-size: 16px;
+            background-color: #fff;
+            -webkit-appearance: none; /* Убирает системный дизайн Safari */
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        /* Добавляем кастомную стрелочку, так как appearance: none её удаляет */
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px;
+        }
+
+        .btn-full { width: 100%; background: var(--accent-red); color: #fff; padding: 18px; border: none; border-radius: 40px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-full:hover { background: #e63542; }
+
+        @media (max-width: 900px) {
+            .hero, .about-content, .club-box { flex-direction: column; text-align: center; }
+            .hero-text h1 { font-size: 40px; }
+            .menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container nav">
+        <a href="#" class="logo">LinguoGeek</a>
+        <div class="menu">
+            <a href="#club">Разговорный клуб</a>
+            <a href="#lessons">Уроки</a>
+            <a href="#intensives">Интенсивы</a>
+            <a href="#register" class="btn-cta">Записаться</a>
+        </div>
+    </div>
+</header>
+
+<section class="container hero">
+    <div class="hero-text">
+        <h1>Твой английский оживет здесь</h1>
+        <p>Разговорный клуб в Москве и персональное обучение <br>для тех, кто хочет говорить свободно.</p>
+        <a href="#register" class="btn-full" style="text-decoration: none; display: inline-block; width: auto; padding: 18px 45px;">Записаться на встречу</a>
+    </div>
+    <div class="hero-img">
+        <img src="/Users/ritamukhina/Downloads/Lang club/generated.png" alt="LinguoGeek">
+    </div>
+</section>
+
+<section id="about" class="container about">
+    <div class="about-content">
+        <div class="about-text">
+            <h2 style="font-size: 36px; margin-bottom: 20px;">Давай знакомиться!</h2>
+            <p style="margin-bottom: 20px;">Меня зовут Рита, и я помогу тебе влюбиться в английский. Я не просто учу правилам — я учу ими пользоваться в жизни, на работе и в путешествиях.</p>
+            <p>Посмотри пример моего видео-урока и узнай, как я объясняю сложные темы простыми словами. Это лучший способ понять, подходим ли мы друг другу!</p>
+        </div>
+        <div class="about-video">
+            <iframe src="https://vk.com/video_ext.php?oid=-228912783&id=456239018&autoplay=0" width="100%" height="350" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+</section>
+
+<section id="club" class="container">
+    <div class="club-box">
+        <div class="club-img">
+            <img src="/Users/ritamukhina/Downloads/Lang club/group_upgraded.png" alt="Speaking Club Привоз">
+        </div>
+        <div class="club-info">
+            <span style="color: var(--accent-red); font-weight: 700; text-transform: uppercase; font-size: 13px;">Offline Meeting</span>
+            <h2 style="font-size: 36px; margin: 15px 0;">Разговорный клуб <br>в Жулебино</h2>
+            <p style="margin-bottom: 25px;">Каждую среду в 19:30 мы собираемся в фудмолле "Привоз", чтобы играть в настолки и общаться на английском.</p>
+            <ul style="list-style: none; margin-bottom: 30px;">
+                <li style="margin-bottom: 10px;">🕒 Каждую среду в 19:30</li>
+                <li style="margin-bottom: 10px;">📍 Фудмолл "Привоз", Жулебино</li>
+                <li style="margin-bottom: 10px;">🧩 Игры, современный английский и нетворкинг</li>
+                <li style="margin-bottom: 10px; font-weight: 700; color: var(--preply-blue);">💰 Вход: БЕСПЛАТНО</li>
+            </ul>
+            <a href="#register" class="btn-full" style="background: var(--preply-blue); text-decoration: none; display: inline-block; width: auto; padding: 15px 35px;">Прийти в клуб</a>
+        </div>
+    </div>
+</section>
+
+<section id="lessons" class="container">
+    <h2 class="section-title">Варианты обучения</h2>
+    <div class="price-grid">
+        <div class="price-card">
+            <h3>Speaking Club</h3>
+            <span class="price-val">0 ₽ <small>/ встреча</small></span>
+            <ul>
+                <li>Каждую среду в 19:30</li>
+                <li>Жулебино, фудмолл "Привоз"</li>
+                <li>Игры и живое общение</li>
+            </ul>
+        </div>
+        <div class="price-card" style="border: 2px solid var(--preply-blue);">
+            <h3>Индивидуально</h3>
+            <span class="price-val">от 2 500 ₽ <small>/ 60 мин</small></span>
+            <ul>
+                <li>Абонемент на 4/8 зан.</li>
+                <li>Персональный трек</li>
+                <li>Гибкий график</li>
+            </ul>
+        </div>
+        <div class="price-card">
+            <h3>Сплит (вдвоем)</h3>
+            <span class="price-val">от 1 900 ₽ <small>/ 60 мин</small></span>
+            <ul>
+                <li>Абонемент на 4/8 зан.</li>
+                <li>Учитесь с другом</li>
+                <li>Гибкий график</li>
+            </ul>
+        </div>
+        <div class="price-card">
+            <h3>Мини-группы</h3>
+            <span class="price-val">6 000 ₽ <small>/ 8 зан.</small></span>
+            <ul>
+                <li>Всего 750 ₽ за урок</li>
+                <li>До 5 человек</li>
+                <li>Погружение в среду</li>
+            </ul>
+        </div>
+        <div class="price-card">
+            <h3>Speaking 1-1</h3>
+            <span class="price-val">500 ₽ <small>/ 30 мин</small></span>
+            <ul>
+                <li>Только разговорная практика</li>
+                <li>Быстрый результат</li>
+                <li>Интенсивный формат</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="intensives" class="container">
+    <div style="background: var(--preply-blue); color: white; border-radius: 40px; padding: 80px 40px; text-align: center;">
+        <span style="background: var(--accent-red); padding: 5px 15px; border-radius: 10px; font-weight: 700; font-size: 12px; text-transform: uppercase;">Coming Soon</span>
+        <h2 style="font-size: 40px; margin: 20px 0;">Оффлайн Интенсивы в Москве</h2>
+        <p style="opacity: 0.9; max-width: 600px; margin: 0 auto 40px;">Два дня 4-часового погружения: практика, ланч с преподавателем и бизнес-игры в центре города. Оставь заявку, чтобы узнать дату первым.</p>
+        <a href="#register" class="btn-full" style="background: white; color: var(--preply-blue); text-decoration: none; display: inline-block; width: auto; padding: 15px 35px;">Жду анонс</a>
+    </div>
+</section>
+
+<section class="container">
+    <div class="socials">
+        <h2>Следи за LinguoGeek в соцсетях</h2>
+        <p>Полезные разборы, видео-уроки и анонсы событий</p>
+        <div class="social-links">
+            <a href="https://t.me/LinguoGeek" class="social-btn tg" target="_blank">Telegram</a>
+            <a href="https://vk.com/linguogeek" class="social-btn vk" target="_blank">ВКонтакте</a>
+            <a href="https://youtube.com/@RitaLinguogeek" class="social-btn yt" target="_blank">YouTube</a>
+        </div>
+    </div>
+</section>
+
+<section id="register" class="form-section">
+    <div class="form-box">
+        <h2 style="text-align: center; margin-bottom: 30px;">Связаться со мной</h2>
+        
+        <form action="https://formspree.io/f/xykobkkp" method="POST">
+            
+            <input type="text" name="name" placeholder="Твое имя" required>
+            
+            <input type="text" name="contact" placeholder="Telegram (@username) или Email" required>
+            
+            <select name="format" required>
+                <option value="" disabled selected>Выбери формат</option>
+                <option value="Free Club">Хочу в бесплатный клуб</option>
+                <option value="Individual">Индивидуальные занятия</option>
+                <option value="Mini-group">Мини-группа</option>
+                <option value="Split">Занятия в паре</option>
+                <option value="Practice">Разговорная практика</option>
+            </select>
+            
+            <button type="submit" class="btn-full">Отправить запрос</button>
+            
+        </form>
+    </div>
+</section>
+
+<footer style="padding: 60px 0; border-top: 1px solid #eee; text-align: center; color: #888; font-size: 14px;">
+    <p style="font-weight: 800; color: var(--preply-blue); font-size: 18px; margin-bottom: 10px;">LinguoGeek</p>
+    <p>© 2026. Английский для жизни и общения.</p>
+</footer>
+
+</body>
+</html>
